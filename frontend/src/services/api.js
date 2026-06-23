@@ -54,6 +54,36 @@ export const getTournamentFixtures = (tournamentId, doubleRound = false) =>
 // Team Profile Card API
 export const getTeamProfile = (teamId) => api.get(`/team-profile/${teamId}`);
 
+// Player Center APIs
+export const getPositions = () => api.get('/positions');
+
+export const getPlayers = (params = {}) => api.get('/players', { params });
+export const getPlayer = (id) => api.get(`/players/${id}`);
+export const createPlayer = (formData) =>
+  api.post('/players', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+export const updatePlayer = (id, formData) =>
+  api.put(`/players/${id}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+export const deletePlayer = (id) => api.delete(`/players/${id}`);
+
+export const getPlayerStats = (tournamentId) =>
+  api.get('/player-stats', { params: { tournament_id: tournamentId } });
+export const getTopScorers = (tournamentId, limit) =>
+  api.get('/top-scorers', { params: { tournament_id: tournamentId, limit } });
+export const getPlayerOfTheWeek = (tournamentId, weekStart) =>
+  api.get('/player-of-the-week', {
+    params: { tournament_id: tournamentId, ...(weekStart ? { week_start: weekStart } : {}) },
+  });
+export const getPlayerProfile = (playerId) => api.get(`/player-profile/${playerId}`);
+export const getTeamSheet = (teamId) => api.get(`/team-sheet/${teamId}`);
+
+export const getMatchEvents = (matchId) => api.get(`/matches/${matchId}/events`);
+export const saveMatchEvents = (matchId, events) =>
+  api.post(`/matches/${matchId}/events`, { events });
+
 // Stats API
 export const getStats = () => api.get('/stats');
 

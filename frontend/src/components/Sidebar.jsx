@@ -15,6 +15,10 @@ import {
   FaChevronUp,
   FaChevronLeft,
   FaTimes,
+  FaRunning,
+  FaBullseye,
+  FaMedal,
+  FaUserCircle,
 } from 'react-icons/fa';
 import Logo from './Logo';
 import { useMobileNav } from '../context/MobileNavContext';
@@ -182,6 +186,13 @@ const menuItems = [
   { to: '/team-profile', icon: FaIdCard, label: 'Team Profile Cards' },
 ];
 
+const playerCenterItems = [
+  { to: '/top-scorers', icon: FaRunning, label: 'Top Scorers' },
+  { to: '/player-of-the-week', icon: FaMedal, label: 'Player of the Week' },
+  { to: '/golden-boot', icon: FaBullseye, label: 'Golden Boot Race' },
+  { to: '/player-profile', icon: FaUserCircle, label: 'Player Profiles' },
+];
+
 export default function Sidebar() {
   const location = useLocation();
 
@@ -215,6 +226,22 @@ export default function Sidebar() {
         </nav>
       </div>
 
+      <div>
+        <SectionLabel>Player Center</SectionLabel>
+        <nav className="space-y-1">
+          {playerCenterItems.map((item) => (
+            <SidebarItem
+              key={item.to}
+              to={item.to}
+              icon={item.icon}
+              label={item.label}
+              onClick={onNavigate}
+              active={location.pathname === item.to}
+            />
+          ))}
+        </nav>
+      </div>
+
       <div className="mt-auto">
         <SectionLabel>Quick Links</SectionLabel>
         <nav className="space-y-1">
@@ -240,6 +267,7 @@ export function TournamentSidebar({ tournamentId, tournamentName }) {
 
   const items = [
     { to: `/admin/tournament/${tournamentId}/teams`, icon: FaUsers, label: 'Teams' },
+    { to: `/admin/tournament/${tournamentId}/players`, icon: FaRunning, label: 'Players' },
     { to: `/admin/tournament/${tournamentId}/matches`, icon: FaFutbol, label: 'Matches' },
     { to: `/admin/tournament/${tournamentId}/fixtures`, icon: FaCalendarAlt, label: 'Fixtures' },
     { to: `/admin/tournament/${tournamentId}/generate`, icon: FaTable, label: 'Generate Table' },

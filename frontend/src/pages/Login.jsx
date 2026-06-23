@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { FaFutbol, FaLock, FaShieldAlt, FaTrophy } from 'react-icons/fa';
+import { FaFutbol, FaLock, FaShieldAlt, FaTrophy, FaArrowLeft } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { FadeIn, ScaleIn } from '../components/ui/Motion';
 import OriginButton from '../components/ui/OriginButton';
@@ -34,6 +34,12 @@ export default function Login() {
 
   return (
     <div className="login-shell d-flex flex-column flex-lg-row">
+      {/* Always-visible back-to-home CTA */}
+      <Link to="/" className="admin-back-home" aria-label="Back to home">
+        <FaArrowLeft size={13} />
+        <span>Back to Home</span>
+      </Link>
+
       {/* Left — football illustration + gradient */}
       <div
         className="d-none d-lg-flex col-lg-6 position-relative overflow-hidden"
@@ -182,10 +188,6 @@ export default function Login() {
             </div>
           </div>
         </ScaleIn>
-
-        <p className="position-absolute text-center small text-white-50" style={{ bottom: 24 }}>
-          <Link to="/" className="text-brand fw-semibold text-decoration-none">← Back to home</Link>
-        </p>
       </div>
     </div>
   );

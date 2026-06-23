@@ -16,6 +16,12 @@ import GeneratePage from './pages/GeneratePage';
 import FixturesPage from './pages/FixturesPage';
 import TeamProfilePage from './pages/TeamProfilePage';
 import TeamProfileHistory from './pages/TeamProfileHistory';
+import PlayersPage from './pages/PlayersPage';
+import AddPlayerPage from './pages/AddPlayerPage';
+import TopScorersPage from './pages/TopScorersPage';
+import GoldenBootPage from './pages/GoldenBootPage';
+import PlayerOfTheWeekPage from './pages/PlayerOfTheWeekPage';
+import PlayerProfilePage from './pages/PlayerProfilePage';
 
 function ProtectedRoute({ children }) {
   const isAuth = localStorage.getItem('tablegen-auth') === 'true';
@@ -87,10 +93,45 @@ function App() {
               </PublicLayout>
             }
           />
+          <Route
+            path="/top-scorers"
+            element={
+              <PublicLayout>
+                <TopScorersPage />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/golden-boot"
+            element={
+              <PublicLayout>
+                <GoldenBootPage />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/player-of-the-week"
+            element={
+              <PublicLayout>
+                <PlayerOfTheWeekPage />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/player-profile"
+            element={
+              <PublicLayout>
+                <PlayerProfilePage />
+              </PublicLayout>
+            }
+          />
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />
           <Route path="/admin/tournaments" element={<AdminRoute><TournamentPage /></AdminRoute>} />
           <Route path="/admin/tournament/:tournamentId/teams" element={<AdminRoute><TeamsPage /></AdminRoute>} />
+          <Route path="/admin/tournament/:tournamentId/players" element={<AdminRoute><PlayersPage /></AdminRoute>} />
+          <Route path="/admin/tournament/:tournamentId/players/new" element={<AdminRoute><AddPlayerPage /></AdminRoute>} />
+          <Route path="/admin/tournament/:tournamentId/players/:playerId/edit" element={<AdminRoute><AddPlayerPage /></AdminRoute>} />
           <Route path="/admin/tournament/:tournamentId/matches" element={<AdminRoute><MatchPage /></AdminRoute>} />
           <Route path="/admin/tournament/:tournamentId/generate" element={<AdminRoute><GeneratePage /></AdminRoute>} />
           <Route path="/admin/tournament/:tournamentId/fixtures" element={<AdminRoute><FixturesPage /></AdminRoute>} />

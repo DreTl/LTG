@@ -1,0 +1,36 @@
+# ── Python / backend ──
+__pycache__/
+*.py[cod]
+*$py.class
+backend/venv/
+backend/.venv/
+.venv/
+venv/
+
+# Environment secrets
+.env
+backend/.env
+*.env
+!.env.example
+!backend/.env.example
+
+# Local SQLite database (use PostgreSQL in production)
+backend/database/*.db
+*.sqlite3
+
+# Uploaded media (served from a volume in production)
+backend/uploads/
+
+# Alembic/Flask-Migrate local artifacts are kept, but ignore caches
+*.log
+
+# ── Frontend ──
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# ── Editor / OS ──
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -92,7 +92,12 @@ def update_match(id):
 
 @match_bp.route('/api/matches/<int:id>', methods=['DELETE'])
 def delete_match(id):
+  from services.player_stats import recompute_player_stats
   match = Match.query.get_or_404(id)
+  tournament_id = match.tournament_id
   db.session.delete(match)
   db.session.commit()
+  # Player season stats are derived from match events, which cascade-delete
+  # with the match, so rebuild the affected tournament's aggregates.
+  recompute_player_stats(tournament_id)
   return jsonify({'message': 'Match deleted successfully'})

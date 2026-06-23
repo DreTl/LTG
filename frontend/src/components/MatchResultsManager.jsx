@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { FaEdit, FaTrash, FaExclamationTriangle } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaExclamationTriangle, FaFutbol } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import MatchForm from './MatchForm';
+import MatchEventsManager from './MatchEventsManager';
 import TeamAvatar from './TeamAvatar';
 import {
   getMatches,
@@ -23,6 +24,7 @@ export default function MatchResultsManager({
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState(null);
   const [deleting, setDeleting] = useState(null);
+  const [eventsMatch, setEventsMatch] = useState(null);
 
   const fetchData = async () => {
     try {
@@ -220,6 +222,13 @@ export default function MatchResultsManager({
                     <td className="p-3 md:p-4">
                       <div className="flex flex-wrap gap-2 justify-end">
                         <button
+                          onClick={() => setEventsMatch(match)}
+                          className="btn btn-sm btn-success rounded-lg flex items-center gap-1"
+                          title="Record player goals, assists & cards"
+                        >
+                          <FaFutbol /> Events
+                        </button>
+                        <button
                           onClick={() => handleEdit(match)}
                           className="btn btn-sm btn-primary rounded-lg flex items-center gap-1"
                           title="Edit this result"
@@ -245,8 +254,16 @@ export default function MatchResultsManager({
 
       {!compact && matches.length > 0 && (
         <p className="text-sm text-white/40">
-          {matches.length} result{matches.length !== 1 ? 's' : ''} recorded. Edit or delete any row to fix mistakes.
+          {matches.length} result{matches.length !== 1 ? 's' : ''} recorded. Use <strong>Events</strong> to log goals & assists, or edit/delete any row to fix mistakes.
         </p>
+      )}
+
+      {eventsMatch && (
+        <MatchEventsManager
+          match={eventsMatch}
+          onClose={() => setEventsMatch(null)}
+          onSaved={fetchData}
+        />
       )}
     </div>
   );
